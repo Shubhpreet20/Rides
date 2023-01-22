@@ -13,4 +13,5 @@
     <string name="enter_list_size">Enter List Size</string>
     <string name="get_vehicles">Get Vehicles</string>
     <string name="vehicle_details_label">Vehicle Details</string>
+    <string name="menu_refresh">Refresh</string>
 </resources>

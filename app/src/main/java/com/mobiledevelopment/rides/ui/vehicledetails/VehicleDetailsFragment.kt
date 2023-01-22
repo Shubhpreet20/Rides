@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.mobiledevelopment.rides.MainViewModel
+import com.mobiledevelopment.rides.Utils
 import com.mobiledevelopment.rides.databinding.FragmentVehicleDetailsBinding
 
 class VehicleDetailsFragment : Fragment() {
@@ -37,7 +38,18 @@ class VehicleDetailsFragment : Fragment() {
             colorTv.text = vehicle.color
             carTypeTv.text = vehicle.carType
         }
+
+        binding.carbonEmBtn.setOnClickListener {
+            val messageBottomSheetDialog = MessageBottomSheetDialog()
+            val estCarbonEmission = Utils.getEstCarbonEmission(args.vehicle.kilometrage)
+            val args = Bundle()
+            args.putDouble(MessageBottomSheetDialog.EXTRA_CARBON_EMISSION, estCarbonEmission)
+            messageBottomSheetDialog.arguments = args
+            messageBottomSheetDialog.show(childFragmentManager, "MessageBottomSheetDialog")
+        }
     }
+
+
 
 
 }

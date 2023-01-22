@@ -24,9 +24,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _response: MutableLiveData<Response<List<Vehicle>>> = MutableLiveData()
     val response: LiveData<Response<List<Vehicle>>> = _response
 
+    private val _sizeData: MutableLiveData<Int> = MutableLiveData()
+    val sizeData: LiveData<Int> = _sizeData
+
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> = _loading
+
+
+    private fun setSize(size: Int) {
+        _sizeData.value = size
+    }
+
+    fun setLoading(isLoading: Boolean) {
+        _loading.postValue(isLoading)
+    }
+
 
     fun getVehiclesList(size: Int?) {
         size?.apply {
+            setSize(size)
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
                     makeSynchronousNetworkRequest(size, object : ResponseCallback<List<Vehicle>> {
